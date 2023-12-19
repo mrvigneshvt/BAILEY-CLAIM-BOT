@@ -81,6 +81,8 @@ async function connectionLogic(){
                      sock.sendMessage(claimerGroup, { text: `#claim ${captcha[1]}` })
                     },500)
                     console.log(`message sent`);
+                    sock.sendMessage(Dealer, {text: `Code Sent claimed Captcha: ${captcha[1]} and tier ${tier[1]}`})
+
                      } }
             }else if(imageMessage && imageMessage.caption){
                 const caption = imageMessage.caption
@@ -95,6 +97,8 @@ async function connectionLogic(){
                         sock.sendMessage(claimerGroup, { text: `#claim ${captcha[1]}` })
                        },500)
                     console.log(`message sent`)
+                    sock.sendMessage(Dealer, {text: `Code Sent claimed Captcha: ${captcha[1]} and tier ${tier[1]}`})
+
 
             }
         }

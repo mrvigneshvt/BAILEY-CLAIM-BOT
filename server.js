@@ -64,6 +64,7 @@ async function connectionLogic(){
 
     if(vixyz.messages[0].key.participant === Dealer1){
         //console.log(`message received from DEaeler`)
+        try{
         if (vixyz.messages[0].key.remoteJid === groupID1 || vixyz.messages[0].key.remoteJid === groupID2) {
             const videoMessage = vixyz.messages[0].message.videoMessage;
             const imageMessage = vixyz.messages[0].message.imageMessage;
@@ -73,7 +74,7 @@ async function connectionLogic(){
                 const caption = (videoMessage.caption || imageMessage.caption)
                 const captcha = caption.match(/Captcha: (\w+)/);
     
-                if (captcha && captcha[1]) {
+                if(captcha && captcha[1]) {
                     const tier = await caption.match(/🪄 \*Tier:\* ([a-z A-Z 0-9]{1})/);
                     if(tier[1] === 'S'){
                     console.log(tier[1])
@@ -82,7 +83,6 @@ async function connectionLogic(){
                     },500)
                     console.log(`message sent`);
                     sock.sendMessage(Dealer, {text: `Code Sent claimed Captcha: ${captcha[1]} and tier ${tier[1]}`})
-
                      } }
             }else if(imageMessage && imageMessage.caption){
                 const caption = imageMessage.caption
@@ -102,7 +102,12 @@ async function connectionLogic(){
 
             }
         }
-    }}}});
+    }}}
+catch(error){
+    sock.sendMessage(Dealer, {text: `error occured=> ${error}`})
+    console.log(error)
+
+}}})
     
     sock.ev.on('creds.update', saveCreds)
 }

@@ -42,7 +42,7 @@ async function connectionLogic(){
             lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
         }else if(connection === "open"){
             console.log(`Connection Opened`);
-            sock.sendMessage('917010892470@s.whatsapp.net',{text: "Bot On waiting to catch captcha -_*");
+            sock.sendMessage('917010892470@s.whatsapp.net',{text: "Bot On waiting to catch captcha -_*"});
         }
 
         if(shouldReconnect){

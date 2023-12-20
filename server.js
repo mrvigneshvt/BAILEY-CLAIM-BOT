@@ -20,6 +20,7 @@ async function connectionLogic(){
         const {connection, lastDisconnect , qr} = update || {};
 
         //sock.sendMessage(Dealer,{text: `Bot Turned ON`})
+        
 
 
         if(!qr){
@@ -39,18 +40,15 @@ async function connectionLogic(){
         if(connection === "close"){
             const shouldReconnect = 
             lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
+        }else if(connection === "open"){
+            console.log(`Connection Opened`);
+            sock.sendMessage('917010892470@s.whatsapp.net',{text: "Bot On waiting to catch captcha -_*");
         }
 
         if(shouldReconnect){
             connectionLogic();
         }
     })
-
-    sock.ev.on('messages.update',(messageInfo)=>{
-        console.log(messageInfo)
-    })
-
-    
 
     sock.ev.on('messages.upsert', async (vixyz) => {
 

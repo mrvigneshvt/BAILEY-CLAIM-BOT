@@ -2,6 +2,8 @@ import {DisconnectReason} from '@whiskeysockets/baileys';
 import baileyObject from '@whiskeysockets/baileys';
 import { useMultiFileAuthState } from '@whiskeysockets/baileys'
 
+console.log('MADE BY VIXYZ')
+
 import  Qrcode  from 'qrcode';
 import TelegramBot from 'node-telegram-bot-api';
 

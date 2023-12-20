@@ -19,6 +19,8 @@ async function connectionLogic(){
     sock.ev.on('connection-update', async(req,res)=>{
         const {connection, lastDisconnect , qr} = update || {};
 
+        //sock.sendMessage(Dealer,{text: `Bot Turned ON`})
+
 
         if(!qr){
             /*const qrImageBuffer = await Qrcode.toBuffer(qr, { errorCorrectionLevel: 'H' });

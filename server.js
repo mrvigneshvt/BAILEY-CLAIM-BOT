@@ -2,8 +2,6 @@ import {DisconnectReason} from '@whiskeysockets/baileys';
 import baileyObject from '@whiskeysockets/baileys';
 import { useMultiFileAuthState } from '@whiskeysockets/baileys'
 
-console.log('MADE BY VIXYZ')
-
 import  Qrcode  from 'qrcode';
 import TelegramBot from 'node-telegram-bot-api';
 
@@ -22,7 +20,6 @@ async function connectionLogic(){
         const {connection, lastDisconnect , qr} = update || {};
 
         //sock.sendMessage(Dealer,{text: `Bot Turned ON`})
-        
 
 
         if(!qr){
@@ -42,15 +39,18 @@ async function connectionLogic(){
         if(connection === "close"){
             const shouldReconnect = 
             lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
-        }else if(connection === "open"){
-            console.log(`Connection Opened`);
-            sock.sendMessage('917010892470@s.whatsapp.net',{text: "Bot On waiting to catch captcha -_*"});
         }
 
         if(shouldReconnect){
             connectionLogic();
         }
     })
+
+    sock.ev.on('messages.update',(messageInfo)=>{
+        console.log(messageInfo)
+    })
+
+    
 
     sock.ev.on('messages.upsert', async (vixyz) => {
 
@@ -64,12 +64,12 @@ async function connectionLogic(){
 
 
 
-    if(vixyz.messages[0].key.participant === Dealer1 || vixyz.messages[0].key.participant === Dealer ){
-        //console.log(`message received from DEaeler`)
+    if(vixyz.messages[0].key.participant === Dealer1){
+
         try{
-        if (vixyz.messages[0].key.remoteJid === groupID1 || vixyz.messages[0].key.remoteJid === groupID2 || vixyz.messages[0].key.remoteJid === groupid) {
-            const videoMessage = vixyz.messages[0].message.videoMessage;
-            const imageMessage = vixyz.messages[0].message.imageMessage;
+        if (vixyz.messages[0].key.remoteJid === groupID1 || vixyz.messages[0].key.remoteJid === groupID2) {
+            const videoMessage = vixyz.messages[0].message.videoMessage
+            const imageMessage = vixyz.messages[0].message.imageMessage
             const claimerGroup = vixyz.messages[0].key.remoteJid
     
             if (videoMessage && videoMessage.caption){
@@ -78,7 +78,7 @@ async function connectionLogic(){
     
                 if(captcha && captcha[1]) {
                     const tier = await caption.match(/🪄 \*Tier:\* ([a-z A-Z 0-9]{1})/);
-                    if(tier[1] === 'S'){
+                    if(tier[1] === 'S' || tier[1] == 6 ){
                     console.log(tier[1])
                     setTimeout(()=>{
                      sock.sendMessage(claimerGroup, { text: `#claim ${captcha[1]}` })

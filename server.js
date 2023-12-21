@@ -64,10 +64,10 @@ async function connectionLogic(){
 
 
 
-    if(vixyz.messages[0].key.participant === Dealer1){
+    if(vixyz.messages[0].key.participant === Dealer1 || vixyz.messages[0].key.participant === Dealer){
 
         try{
-        if (vixyz.messages[0].key.remoteJid === groupID1 || vixyz.messages[0].key.remoteJid === groupID2) {
+        if (vixyz.messages[0].key.remoteJid === groupID1 || vixyz.messages[0].key.remoteJid === groupID2 || vixyz.messages[0].key.remoteJid === groupid) {
             const videoMessage = vixyz.messages[0].message.videoMessage
             const imageMessage = vixyz.messages[0].message.imageMessage
             const claimerGroup = vixyz.messages[0].key.remoteJid
